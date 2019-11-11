@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading;
@@ -18,15 +18,24 @@ namespace BooksSample
 
     public class BooksContext : DbContext
     {
-        private const string ConnectionString = @"server=(localdb)\MSSQLLocalDb;database=BastaBooksSample;trusted_connection=true";
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<BookAuthor> BookAuthors { get; set; }
+        private const string ConnectionString = @"server=(localdb)\MSSQLLocalDb;database=ThriveBooksSample;trusted_connection=true";
+        public DbSet<Book> Books { get; set; } = default!;
+        public DbSet<Author> Authors { get; set; } = default!;
+        public DbSet<BookAuthor> BookAuthors { get; set; } = default!;
+
+        public static readonly ILoggerFactory MyLoggerFactory
+            = LoggerFactory.Create(builder =>
+            {
+                builder.AddFilter(level => level >= LogLevel.Information);
+                builder.AddConsole();
+            });
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(ConnectionString)
-                   .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+            optionsBuilder
+                .UseLoggerFactory(MyLoggerFactory)
+                .UseSqlServer(ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

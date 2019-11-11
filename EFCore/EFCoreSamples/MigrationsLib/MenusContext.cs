@@ -7,8 +7,8 @@ namespace MigrationsLib
         public MenusContext(DbContextOptions<MenusContext> options): 
             base(options) { }
 
-        public DbSet<Menu> Menus { get; set; }
-        public DbSet<MenuCard> MenuCards { get; set; }
+        public DbSet<Menu> Menus { get; set; } = default!;
+        public DbSet<MenuCard> MenuCards { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

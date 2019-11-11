@@ -8,7 +8,7 @@ namespace TPHWithConventions
         public int PaymentId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [Column(TypeName = "Money")]
         public decimal Amount { get; set; }
     }

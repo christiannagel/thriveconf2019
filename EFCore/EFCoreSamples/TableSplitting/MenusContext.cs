@@ -10,7 +10,7 @@ namespace TableSplitting
     public class MenusContext : DbContext
     {
         private const string ConnectionString = @"server=(localdb)\MSSQLLocalDb;" +
-            "Database=Menus;Trusted_Connection=True";
+            "Database=ThriveMenus;Trusted_Connection=True";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,13 +21,13 @@ namespace TableSplitting
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Menu>().HasOne<MenuDetails>(m => m.Details).WithOne(d => d.Menu).HasForeignKey<MenuDetails>(d => d.MenuDetailsId);
+            modelBuilder.Entity<Menu>().HasOne<MenuDetails>("Details").WithOne("Menu").HasForeignKey<MenuDetails>(d => d.MenuDetailsId);
             modelBuilder.Entity<Menu>().ToTable(SchemaNames.Menus);
             modelBuilder.Entity<MenuDetails>().ToTable(SchemaNames.Menus);
             modelBuilder.Entity<Menu>().Property(m => m.Price).HasColumnType("money");
         }
 
-        public DbSet<Menu> Menus { get; set; }
-        public DbSet<MenuDetails> MenuDetails { get; set; }
+        public DbSet<Menu> Menus { get; set; } = default!;
+        public DbSet<MenuDetails> MenuDetails { get; set; } = default!;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-#nullable disable
-
 namespace LazyLoading
 {
     public class BooksContext : DbContext
@@ -9,9 +7,9 @@ namespace LazyLoading
         public BooksContext(DbContextOptions<BooksContext> options)
             : base(options) { }
 
-        public DbSet<Book> Books { get; private set; }
-        public DbSet<Chapter> Chapters { get; private set; }
-        public DbSet<User> Users { get; private set; }
+        public DbSet<Book> Books { get; private set; } = default!;
+        public DbSet<Chapter> Chapters { get; private set; } = default!;
+        public DbSet<User> Users { get; private set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +26,7 @@ namespace LazyLoading
             new User(2, "Istvan Novak"),
             new User(3, "Charlotte Kughen")
         };
+
         private Book _book = new Book(1, "Professional C# 7 and .NET Core 2.0", "Wrox Press");
         private Chapter[] _chapters = new[]
         {

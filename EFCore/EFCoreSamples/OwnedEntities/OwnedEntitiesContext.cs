@@ -2,10 +2,11 @@
 
 namespace OwnedEntities
 {
+#nullable disable
     public class OwnedEntitiesContext : DbContext
     {
         private const string ConnectionString = @"server=(localdb)\MSSQLLocalDb;" +
-            "Database=OwnedEntities;Trusted_Connection=True";
+            "Database=ThriveOwnedEntities;Trusted_Connection=True";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,4 +29,5 @@ namespace OwnedEntities
 
         public DbSet<Person> People { get; set; }
     }
+#nullable restore
 }

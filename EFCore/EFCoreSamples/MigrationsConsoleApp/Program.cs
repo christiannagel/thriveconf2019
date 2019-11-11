@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MigrationsLib;
-using System;
 
 namespace MigrationsConsoleApp
 {
@@ -9,20 +9,18 @@ namespace MigrationsConsoleApp
     {
         private const string ConnectionString = @"server=(localdb)\mssqllocaldb;database=ProCSharpMigrations;trusted_connection=true";
 
-        static void Main(string[] args)
+        static void Main()
         {
-            RegisterServices();
-            var context = Container.GetService<MenusContext>();
+            using var host = Host
+                .CreateDefaultBuilder()
+                .ConfigureServices(services =>
+                {
+                    services.AddDbContext<MenusContext>(options =>
+                        options.UseSqlServer(ConnectionString));
+                }).Build();
+
+            var context = host.Services.GetService<MenusContext>();
             context.Database.Migrate();
         }
-
-        private static void RegisterServices()
-        {
-            var services = new ServiceCollection();
-            services.AddDbContext<MenusContext>(options =>
-                options.UseSqlServer(ConnectionString));
-            Container = services.BuildServiceProvider();
-        }
-        public static IServiceProvider Container { get; private set; }
     }
 }

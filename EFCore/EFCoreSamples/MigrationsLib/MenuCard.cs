@@ -5,7 +5,7 @@ namespace MigrationsLib
     public class MenuCard
     {
         public int MenuCardId { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public List<Menu> Menus { get; } = new List<Menu>();
         public override string ToString() => Title;
     }

@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace MigrationsLib.Migrations
 {
@@ -17,11 +15,11 @@ namespace MigrationsLib.Migrations
                 schema: "mc",
                 columns: table => new
                 {
-                    MenuCardId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    MenuCardId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    LastUpdated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,11 +31,11 @@ namespace MigrationsLib.Migrations
                 schema: "mc",
                 columns: table => new
                 {
-                    MenuId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MenuCardId = table.Column<int>(type: "int", nullable: false),
+                    MenuId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(maxLength: 120, nullable: false),
                     Price = table.Column<decimal>(type: "Money", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: true)
+                    MenuCardId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

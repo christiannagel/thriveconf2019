@@ -2,6 +2,6 @@
 {
     public class CreditcardPayment : Payment
     {
-        public string CreditcardNumber { get; set; }
+        public string CreditcardNumber { get; set; } = string.Empty;
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace MigrationsLib.Migrations
 {
@@ -12,7 +10,6 @@ namespace MigrationsLib.Migrations
                 name: "Allergens",
                 schema: "mc",
                 table: "Menus",
-                type: "nvarchar(max)",
                 nullable: true);
         }
 

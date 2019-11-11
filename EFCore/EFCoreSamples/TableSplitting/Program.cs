@@ -4,7 +4,7 @@ namespace TableSplitting
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             CreateDatabase();
             DeleteDatabase();
@@ -12,12 +12,10 @@ namespace TableSplitting
 
         private static void CreateDatabase()
         {
-            using (var context = new MenusContext())
-            {
-                bool created = context.Database.EnsureCreated();
-                string creationInfo = created ? "created" : "exists";
-                Console.WriteLine($"database {creationInfo}");
-            }
+            using var context = new MenusContext();
+            bool created = context.Database.EnsureCreated();
+            string creationInfo = created ? "created" : "exists";
+            Console.WriteLine($"database {creationInfo}");
         }
 
         private static void DeleteDatabase()
@@ -26,12 +24,10 @@ namespace TableSplitting
             string input = Console.ReadLine();
             if (input.ToLower() == "y")
             {
-                using (var context = new MenusContext())
-                {
-                    bool deleted = context.Database.EnsureDeleted();
-                    string deletionInfo = deleted ? "deleted" : "not deleted";
-                    Console.WriteLine($"database {deletionInfo}");
-                }
+                using var context = new MenusContext();
+                bool deleted = context.Database.EnsureDeleted();
+                string deletionInfo = deleted ? "deleted" : "not deleted";
+                Console.WriteLine($"database {deletionInfo}");
             }
         }
     }

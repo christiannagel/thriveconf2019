@@ -5,7 +5,7 @@ namespace TPHWithConventions
     public class BankContext : DbContext
     {
         private const string ConnectionString = @"server=(localdb)\MSSQLLocalDb;" +
-            "Database=LocalBank;Trusted_Connection=True";
+            "Database=ThriveLocalBank;Trusted_Connection=True";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -15,8 +15,8 @@ namespace TPHWithConventions
         }
 
 
-        public DbSet<Payment> Payments { get; set; }
-        public DbSet<CreditcardPayment> CreditcardPayments { get; set; }
-        public DbSet<CashPayment> CashPayments { get; set; }
+        public DbSet<Payment> Payments { get; set; } = default!;
+        public DbSet<CreditcardPayment> CreditcardPayments { get; set; } = default!;
+        public DbSet<CashPayment> CashPayments { get; set; } = default!;
     }
 }
