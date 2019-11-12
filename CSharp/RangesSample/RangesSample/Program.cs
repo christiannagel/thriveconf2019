@@ -6,7 +6,7 @@ namespace RangesSample
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             byte[] buffer = new byte[4096];
             Span<byte> span = buffer.AsSpan();
@@ -40,6 +40,9 @@ namespace RangesSample
 
             var coll = new MyCollection();
             var slice1 = coll[20..^55];
+
+            var list = Enumerable.Range(0, 100).ToList();
+            var listslice = list.Range(10..20);
 
             Console.WriteLine();
         }
