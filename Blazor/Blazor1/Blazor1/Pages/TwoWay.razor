@@ -1,0 +1,33 @@
+﻿@page "/twoway"
+
+<h1>Two-way binding</h1>
+
+
+x: <input type="number" @bind-value="val1" />
+<br />
+y: <input type="number" @bind-value="val2" /> 
+<br />
+
+<button class="btn btn-primary" @onclick="OnAdd">Add</button>
+<br />
+<button class="btn" @onclick="OnSubtract">Subtract</button>
+<br />
+<div>@result</div>
+
+@code { 
+
+    int val1 = 0;
+    int val2 = 0;
+    int result;
+
+    void OnAdd()
+    {
+        result = val1 + val2;
+    }
+
+    void OnSubtract()
+    {
+        result = val1 - val2;
+    }
+
+}
